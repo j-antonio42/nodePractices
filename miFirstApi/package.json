@@ -1,0 +1,22 @@
+{
+  "name": "mifirstapi",
+  "version": "1.0.0",
+  "description": "mi  primera api con express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "kodemia"
+  ],
+  "author": "@j-antonio42",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}

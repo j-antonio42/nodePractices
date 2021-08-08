@@ -1,0 +1,18 @@
+{
+  "name": "firstproject",
+  "version": "1.0.0",
+  "description": "first node project",
+  "main": "index.js",
+  "scripts": {
+    "iniciar": "echo 'hola desde script' ; echo 'este es otro echo'",
+    "start": "echo 'ejecuta inicio'"
+  },
+  "keywords": [
+    "introduccion-node"
+  ],
+  "author": "@j-antonio42",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.29.1"
+  }
+}

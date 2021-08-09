@@ -22,26 +22,26 @@ router.get('/', async(request, response) => {
     const {module, gender, name, count} = request.query
     const content = await readFilePromise('./kodemia.json')
 
-    let kodersData = content.mentors
+    let mentorsData = content.mentors
 
     // string -> true
     // indefinido -> false
     if(module) {
-        kodersData = kodersData.filter(mentor => mentor.module === module)
+        mentorsData = mentorsData.filter(mentor => mentor.module === module)
     }
     
     if(gender) {
-        kodersData = kodersData.filter(koder => koder.gender === gender)
+        mentorsData = mentorsData.filter(mentor => mentor.gender === gender)
       }
 
     if(name) {
-        kodersData = kodersData.filter(koder => koder.name === name)
+        mentorsData = mentorsData.filter(mentor => mentor.name === name)
       }  
     
     if(count) {
-        kodersData = kodersData.splice(0, parseInt(count))
+        mentorsData = mentorsData.splice(0, parseInt(count))
     }
-      content.koders = kodersData || content.mentors
+      content.mentors = mentorsData || content.mentors
 
     response.status(200).json({
         success: true,
@@ -56,10 +56,10 @@ router.get('/', async(request, response) => {
 
 router.post('/', async (request, response) => {
     
-    const newKoder = request.body
+    const newMentor = request.body
     const content = await readFilePromise('kodemia.json')
 
-    content.mentors.push(newKoder)
+    content.mentors.push(newMentor)
 
     fs.writeFileSync('kodemia.json',JSON.stringify(content, null, 2), 'utf8')
 
@@ -67,7 +67,7 @@ router.post('/', async (request, response) => {
         success: true,
         message: 'mentor added',
         data:{
-            koder: newKoder
+            mentor: newMentor
         }
 
     })
@@ -82,20 +82,20 @@ router.patch('/:id', async(request, response) => {
 
     const content = await readFilePromise('kodemia.json')
 
-    const newKoders = content.mentors.map((koder) => {
-        if (koder.id === parseInt(id)) {
-            koder = {...koder, name, generation}
+    const newMentor = content.mentors.map((mentor) => {
+        if (mentor.id === parseInt(id)) {
+            mentor = {...mentor, name, generation}
         }
-        return koder
+        return mentor
     })
 
-    content.koders = newKoders
+    content.mentors = newMentor
 
     fs.writeFileSync('kodemia.json',JSON.stringify(content, null, 2), 'utf8')
 
     response.json({
         success: true,
-        message: 'koder updated',
+        message: 'mentor updated',
     })
 
 })
@@ -106,9 +106,9 @@ router.delete('/:id', async(request, response) => {
 
     const content = await readFilePromise('kodemia.json')
 
-    const filteredKoder = content.mentors.filter(koder => koder.id !== parseInt(id))
+    const filteredMentor = content.mentors.filter(mentor => mentor.id !== parseInt(id))
 
-    content.mentors = filteredKoder
+    content.mentors = filteredMentor
 
     fs.writeFileSync('kodemia.json',JSON.stringify(content, null, 2), 'utf8')
 
@@ -124,9 +124,9 @@ router.get('/:id', async (request, response) => {
     const {id} = request.params
     const content = await readFilePromise('kodemia.json')
 
-    const foundKoder = content.mentors.find(koder => koder.id === parseInt(id))
+    const foundMentor = content.mentors.find(mentor => mentor.id === parseInt(id))
 
-    if(!foundKoder){
+    if(!foundMentor){
         response.status(404).json({
             success: false,
             message: 'not found',
@@ -136,7 +136,7 @@ router.get('/:id', async (request, response) => {
             success: true,
             message: 'Here he is',
             data: {
-                koder: foundKoder
+                mentor: foundMentor
             }
         })
     }

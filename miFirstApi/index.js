@@ -170,13 +170,6 @@ server.get('/koders/:id', async (request, response) => {
     }
 })
 
-/* 
-implementar genero al json de kodemia
-hacer un filter por genero
-hacer un filter por name
-todo con query params en get koders
-?gender='ḿ'&name='Jose'
-     */
 
 server.listen(8080, () => {
     console.log('listening on port localhost: 8080')

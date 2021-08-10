@@ -42,9 +42,11 @@ server.get('/koders', async (request, response) => {
 
 
 mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
-    .then((connection) => {
-        console.log('Yeii DB Connected ^^')
-       
+    .then(async (connection) => {
+        console.log('finally conected')
+        server.listen(8000, () => {
+            console.log('Server listening')
+        })
     })
     .catch(err => {
         console.log('Error: ', err)

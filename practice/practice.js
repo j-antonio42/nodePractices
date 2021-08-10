@@ -24,3 +24,5 @@ async function catchPokemon(url){
 
 catchPokemon(pokemonAPI)
 
+
+

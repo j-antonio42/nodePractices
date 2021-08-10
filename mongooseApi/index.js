@@ -45,7 +45,7 @@ mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(async (connection) => {
         console.log('finally conected')
         server.listen(8000, () => {
-            console.log('Server listening')
+            console.log('Server listening on 8000')
         })
     })
     .catch(err => {

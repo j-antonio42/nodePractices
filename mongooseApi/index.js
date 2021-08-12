@@ -1,3 +1,4 @@
+const { response } = require('express')
 const express = require('express')
 const mongoose = require('mongoose')
 const Koder = require('./koderModel')
@@ -10,19 +11,33 @@ const dbName = 'kodemia'
 
 const url = `mongodb+srv://${dbUser}:${dbPassword}@${dbHost}/${dbName}`
 
-
-
+//middleware
+server.use(express.json())
 
 server.get('/', (request, response) => {
     response.json({
-        message: 'API with mongoose'
+        message: 'Hello koders'
     })
 })
 
 server.get('/koders', async (request, response) => {
 
-    const koders = await Koder.find()
+    const {gender, age, is_min_age } = request.query
 
+    const filters = {}
+
+    if(gender) filters.gender = gender
+    if(age){
+        if (JSON.parse(is_min_age) ){
+            filters.age = {$get: parseInt(age)}
+        }else{
+            filters.age = age
+        }
+    } 
+   
+    console.log(filters)
+
+    const koders = await Koder.find(filters)
 
     response.json({
         success: true,
@@ -32,6 +47,32 @@ server.get('/koders', async (request, response) => {
         }
     })
 })
+
+
+server.post('/koders', async (request, response) => {
+
+   try {
+    const newKoder = request.body
+
+    const koderCreated = await Koder.create(newKoder)
+ 
+    response.json({
+     success: true,
+     message: 'koder created',
+     data: {
+         koder: koderCreated
+     }
+   })
+    
+        }catch (error){
+    response.status(400)
+    response.json({
+        success: true,
+        message: error.message
+    })
+   }
+})
+
 
 // Práctica:
 
@@ -52,4 +93,3 @@ mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
         console.log('Error: ', err)
     })
 
-   

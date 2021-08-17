@@ -1,12 +1,9 @@
 const mongoose = require('mongoose')
 const server = require('../server')
 
-const dbUser = 'Toni'
-const dbPassword = 'mikeperruno'
-const dbHost = 'kodemia12g.zelm4.mongodb.net'
-const dbName = 'kodemia'
+const {DB_USER, DB_PASSWORD, DB_HOST, DB_NAME} = process.env
 
-const url = `mongodb+srv://${dbUser}:${dbPassword}@${dbHost}/${dbName}` 
+const url = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}` 
 
 // coneccion a la base de datos por medio de moongose
 

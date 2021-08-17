@@ -1,16 +1,22 @@
 // La definicion de nuestro servidor
 
 const express = require('express') // importar express
+const cors = require('cors')
+
 const kodersRouter = require('./routers/koders')
 const mentorsRouter = require('./routers/mentors')
+const authRouter = require('./routers/auth')
+
 const server = express() // instanciar express
 
 //middlewares
 server.use(express.json())
+server.use(cors())
 
 //agregamos los routers
 server.use('/koders', kodersRouter)
 server.use('/mentors', mentorsRouter)
+server.use('/auth', authRouter)
 
 module.exports = server  // exportar el server
 

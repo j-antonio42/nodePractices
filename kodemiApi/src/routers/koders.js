@@ -1,8 +1,9 @@
 const express = require('express')
 const koders = require('../usecases/koders')
 const router = express.Router()
+const isAuth = require('../middlewares/auth')
 
-router.get('/', async (request, response) => {
+router.get('/', isAuth, async (request, response) => {
     try {
         const allKoders = await koders.getAll()
         response.json({
@@ -45,7 +46,7 @@ router.post('/', async (request, response) => {
     }
 })
 
-router.patch('/:id', async (request, response) => {
+router.patch('/:id', isAuth, async (request, response) => {
     try {
         const {id} = request.params
         const {body} = request
@@ -69,7 +70,7 @@ router.patch('/:id', async (request, response) => {
     }
 })
 
-router.delete('/:id', async (request, response) => {
+router.delete('/:id', isAuth, async (request, response) => {
     try {
         const {id} = request.params
         const deleteKoder = await koders.eraseOne(id)

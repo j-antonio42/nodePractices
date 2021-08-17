@@ -1,6 +1,9 @@
 // inicialice el 
 // server
 // conexion a las Bases de datos
+require('dotenv').config()
+
+//console.log('Env: ', process.env)
 const server = require('./src/server') //esta variable contiene la instancia de express
 const dbConnect = require('./src/lib/db') //esta variable contiene la funcion connect a la db
 

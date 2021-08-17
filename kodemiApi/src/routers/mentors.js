@@ -1,6 +1,9 @@
 const express = require('express')
 const mentors = require('../usecases/mentors')
 const router = express.Router()
+const isAuth = require('../middlewares/auth')
+
+router.use(isAuth)
 
 router.get('/', async (request, response) => {
     try {
